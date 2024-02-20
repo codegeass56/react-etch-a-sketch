@@ -46,3 +46,9 @@ button {
 .toggleLinesBtn {
   background-color: var(--color-toggleLinesBtn-light);
 }
+
+.flexContainer {
+  display: flex;
+  width: 640px;
+  justify-content: space-between;
+}

@@ -1,11 +1,9 @@
-import Button from "./components/Button";
-import Header from "./components/Header/Header";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div>
       <Header />
-      <Button className="eraserBtn">Reset</Button>
     </div>
   );
 }
