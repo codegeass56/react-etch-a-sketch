@@ -27,7 +27,14 @@ function App() {
         >
           Eraser
         </Button>
-        <Button className="clearBtn">Clear</Button>
+        <Button
+          className="clearBtn"
+          onClick={() => {
+            setColorValues((values) => values.map(() => 0));
+          }}
+        >
+          Clear
+        </Button>
       </FlexContainer>
       <Grid>
         {colorValues.map((val, i) => (
