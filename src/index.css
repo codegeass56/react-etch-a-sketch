@@ -1,4 +1,48 @@
+:root {
+  --color-eraserBtn: #f39213;
+  --color-eraserBtn-light: #ffbd67;
+
+  --color-clearBtn: #4caf50;
+  --color-clearBtn-light: #82c285;
+
+  --color-toggleLinesBtn: #0060df;
+  --color-toggleLinesBtn-light: #8fb6e9;
+}
+
 h1 {
   font-size: 50px;
   font-family: "Courier New", Courier, monospace;
+}
+
+button {
+  height: 40px;
+  font-size: 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px black;
+}
+
+.eraserBtn {
+  background-color: var(--color-eraserBtn);
+}
+
+.eraserBtn:hover {
+  background-color: var(--color-eraserBtn-light);
+}
+
+.clearBtn {
+  background-color: var(--color-clearBtn);
+}
+
+.clearBtn:hover {
+  background-color: var(--color-clearBtn-light);
+}
+
+.toggleLinesBtn {
+  background-color: var(--color-toggleLinesBtn);
+}
+
+.toggleLinesBtn {
+  background-color: var(--color-toggleLinesBtn-light);
 }
