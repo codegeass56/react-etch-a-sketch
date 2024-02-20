@@ -10,6 +10,7 @@ function App() {
   const [gridIsClicked, setGridIsClicked] = useState(false);
   const [isEraserMode, setIsEraserMode] = useState(false);
   const [colorValues, setColorValues] = useState(Array(16 ** 2).fill(0));
+  const [showLines, setShowLines] = useState(true);
 
   useEffect(() => {
     document.addEventListener("mouseup", () => {
@@ -47,11 +48,17 @@ function App() {
             colorValue={val}
             onShade={setColorValues}
             index={i}
+            showLines={showLines}
           />
         ))}
       </Grid>
       <FlexContainer>
-        <Button className="toggleLinesBtn">Toggle Grid Lines</Button>
+        <Button
+          className="toggleLinesBtn"
+          onClick={() => setShowLines((showLines) => !showLines)}
+        >
+          Toggle Grid Lines
+        </Button>
         <Slider />
       </FlexContainer>
     </div>

@@ -6,6 +6,7 @@ type Props = {
   colorValue: number;
   onShade: React.Dispatch<React.SetStateAction<number[]>>;
   index: number;
+  showLines: boolean;
 };
 
 function GridItem({
@@ -16,10 +17,11 @@ function GridItem({
   colorValue,
   onShade,
   index,
+  showLines,
 }: Props) {
   const styles: React.CSSProperties = {
     backgroundColor: `rgba(0,0,0,${colorValue})`,
-    border: "1px solid rgb(204, 204, 204)",
+    border: showLines ? "1px solid rgb(204, 204, 204)" : "none",
   };
 
   function handleShade() {
