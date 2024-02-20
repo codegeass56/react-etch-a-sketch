@@ -10,6 +10,9 @@ function App() {
         <Button className="eraserBtn">Eraser</Button>
         <Button className="clearBtn">Clear</Button>
       </FlexContainer>
+      <FlexContainer>
+        <Button className="toggleLinesBtn">Toggle Grid Lines</Button>
+      </FlexContainer>
     </div>
   );
 }
