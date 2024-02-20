@@ -1,10 +1,11 @@
-import { useState } from "react";
-
 type Props = {
   onGridEnable: () => void;
   onGridDisable: () => void;
   gridIsClicked: boolean;
   isEraserMode: boolean;
+  colorValue: number;
+  onShade: React.Dispatch<React.SetStateAction<number[]>>;
+  index: number;
 };
 
 function GridItem({
@@ -12,10 +13,12 @@ function GridItem({
   onGridDisable,
   gridIsClicked,
   isEraserMode,
+  colorValue,
+  onShade,
+  index,
 }: Props) {
-  const [alpha, setAlpha] = useState(0);
   const styles: React.CSSProperties = {
-    backgroundColor: `rgba(0,0,0,${alpha})`,
+    backgroundColor: `rgba(0,0,0,${colorValue})`,
     border: "1px solid rgb(204, 204, 204)",
   };
 
@@ -29,17 +32,17 @@ function GridItem({
   }
 
   function colorCell() {
-    setAlpha((alpha) => {
-      const val = Number((alpha + 0.1).toFixed(1));
-      return val > 0.9 ? 1 : val;
-    });
+    let newVal = Number((colorValue + 0.1).toFixed(1));
+    newVal = newVal > 0.9 ? 1 : newVal;
+
+    onShade((values) => values.map((val, i) => (i === index ? newVal : val)));
   }
 
   function eraseCell() {
-    setAlpha((alpha) => {
-      const val = Number((alpha - 0.1).toFixed(1));
-      return val < 0 ? 0 : val;
-    });
+    let newVal = Number((colorValue - 0.1).toFixed(1));
+    newVal = newVal < 0 ? 0 : newVal;
+
+    onShade((values) => values.map((val, i) => (i === index ? newVal : val)));
   }
 
   return (

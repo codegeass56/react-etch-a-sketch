@@ -9,6 +9,7 @@ import GridItem from "./components/GridItem";
 function App() {
   const [gridIsClicked, setGridIsClicked] = useState(false);
   const [isEraserMode, setIsEraserMode] = useState(false);
+  const [colorValues, setColorValues] = useState(Array(16 ** 2).fill(0));
 
   useEffect(() => {
     document.addEventListener("mouseup", () => {
@@ -29,13 +30,16 @@ function App() {
         <Button className="clearBtn">Clear</Button>
       </FlexContainer>
       <Grid>
-        {Array.from({ length: Math.pow(16, 2) }, (_, i) => (
+        {colorValues.map((val, i) => (
           <GridItem
             key={i}
             onGridEnable={() => setGridIsClicked(true)}
             onGridDisable={() => setGridIsClicked(false)}
             gridIsClicked={gridIsClicked}
             isEraserMode={isEraserMode}
+            colorValue={val}
+            onShade={setColorValues}
+            index={i}
           />
         ))}
       </Grid>
