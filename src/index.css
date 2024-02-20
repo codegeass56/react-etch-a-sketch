@@ -16,14 +16,6 @@ body {
   background-color: var(--color-body-background);
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
 h1 {
   font-size: 50px;
   font-family: "Courier New", Courier, monospace;
@@ -36,6 +28,19 @@ button {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 2px 2px black;
+}
+
+input {
+  width: 400px;
+  cursor: pointer;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .eraserBtn {
@@ -67,4 +72,16 @@ button {
   display: flex;
   width: 640px;
   justify-content: space-between;
+}
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sliderContainer > span {
+  font-size: 20px;
+  font-weight: bold;
 }

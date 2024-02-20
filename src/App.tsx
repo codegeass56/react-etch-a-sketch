@@ -1,6 +1,7 @@
 import Button from "./components/Button";
 import FlexContainer from "./components/FlexContainer";
 import Header from "./components/Header";
+import Slider from "./components/Slider";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       </FlexContainer>
       <FlexContainer>
         <Button className="toggleLinesBtn">Toggle Grid Lines</Button>
+        <Slider />
       </FlexContainer>
     </div>
   );
