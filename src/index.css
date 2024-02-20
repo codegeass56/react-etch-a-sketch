@@ -48,7 +48,8 @@ input {
   background-color: var(--color-eraserBtn);
 }
 
-.eraserBtn:hover {
+.eraserBtn:hover,
+.eraserOn {
   background-color: var(--color-eraserBtn-light);
 }
 

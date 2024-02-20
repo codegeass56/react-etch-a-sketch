@@ -4,9 +4,15 @@ type Props = {
   onGridEnable: () => void;
   onGridDisable: () => void;
   gridIsClicked: boolean;
+  isEraserMode: boolean;
 };
 
-function GridItem({ onGridEnable, onGridDisable, gridIsClicked }: Props) {
+function GridItem({
+  onGridEnable,
+  onGridDisable,
+  gridIsClicked,
+  isEraserMode,
+}: Props) {
   const [alpha, setAlpha] = useState(0);
   const styles: React.CSSProperties = {
     backgroundColor: `rgba(0,0,0,${alpha})`,
@@ -15,15 +21,25 @@ function GridItem({ onGridEnable, onGridDisable, gridIsClicked }: Props) {
 
   function handleShade() {
     if (!gridIsClicked) return;
-    colorCell();
+    if (isEraserMode) {
+      eraseCell();
+    } else {
+      colorCell();
+    }
   }
 
   function colorCell() {
-    if (alpha > 0.9) {
-      setAlpha(1);
-    } else {
-      setAlpha((alpha) => Number((alpha + 0.1).toFixed(1)));
-    }
+    setAlpha((alpha) => {
+      const val = Number((alpha + 0.1).toFixed(1));
+      return val > 0.9 ? 1 : val;
+    });
+  }
+
+  function eraseCell() {
+    setAlpha((alpha) => {
+      const val = Number((alpha - 0.1).toFixed(1));
+      return val < 0 ? 0 : val;
+    });
   }
 
   return (
@@ -32,7 +48,11 @@ function GridItem({ onGridEnable, onGridDisable, gridIsClicked }: Props) {
       style={styles}
       className="gridItem"
       onMouseDown={() => {
-        colorCell();
+        if (isEraserMode) {
+          eraseCell();
+        } else {
+          colorCell();
+        }
         onGridEnable();
       }}
       onMouseUp={onGridDisable}

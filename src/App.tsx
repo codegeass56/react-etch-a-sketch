@@ -8,6 +8,7 @@ import GridItem from "./components/GridItem";
 
 function App() {
   const [gridIsClicked, setGridIsClicked] = useState(false);
+  const [isEraserMode, setIsEraserMode] = useState(false);
 
   useEffect(() => {
     document.addEventListener("mouseup", () => {
@@ -19,7 +20,12 @@ function App() {
     <div className="app">
       <Header />
       <FlexContainer>
-        <Button className="eraserBtn">Eraser</Button>
+        <Button
+          className={isEraserMode ? "eraserOn" : "eraserBtn"}
+          onClick={() => setIsEraserMode((mode) => !mode)}
+        >
+          Eraser
+        </Button>
         <Button className="clearBtn">Clear</Button>
       </FlexContainer>
       <Grid>
@@ -29,6 +35,7 @@ function App() {
             onGridEnable={() => setGridIsClicked(true)}
             onGridDisable={() => setGridIsClicked(false)}
             gridIsClicked={gridIsClicked}
+            isEraserMode={isEraserMode}
           />
         ))}
       </Grid>
