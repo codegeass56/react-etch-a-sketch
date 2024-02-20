@@ -7,6 +7,20 @@
 
   --color-toggleLinesBtn: #0060df;
   --color-toggleLinesBtn-light: #8fb6e9;
+
+  --color-body-background: lightBlue;
+}
+
+body {
+  background-color: var(--color-body-background);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 h1 {
