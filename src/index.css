@@ -95,7 +95,3 @@ input {
   grid-template-columns: repeat(16, auto);
   grid-template-rows: repeat(16, auto);
 }
-
-.gridItem {
-  border: 1px solid rgb(204, 204, 204);
-}

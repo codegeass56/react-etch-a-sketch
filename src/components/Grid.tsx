@@ -1,6 +1,4 @@
-import GridItem from "./GridItem";
-
-function Grid() {
+function Grid({ children }: ChildrenProps) {
   const size = 16;
 
   const styles: React.CSSProperties = {
@@ -9,9 +7,7 @@ function Grid() {
   };
   return (
     <div className="grid" style={styles}>
-      {Array.from({ length: Math.pow(size, 2) }, (_, i) => (
-        <GridItem key={i} />
-      ))}
+      {children}
     </div>
   );
 }
