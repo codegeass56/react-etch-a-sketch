@@ -1,7 +1,18 @@
-import { useState } from "react";
+import { useEffect } from "react";
 
-function Slider() {
-  const [value, setValue] = useState(16);
+type Props = {
+  value: number;
+  onSlide: (size: number) => void;
+};
+
+function Slider({ value, onSlide }: Props) {
+  useEffect(() => {
+    const elements = document.querySelectorAll(".gridItem");
+    elements.forEach(
+      (gridItem) =>
+        ((gridItem as HTMLElement).style.backgroundColor = "rgba(0,0,0,0)")
+    );
+  }, [value]);
   return (
     <div className="sliderContainer">
       <input
@@ -9,7 +20,9 @@ function Slider() {
         min="16"
         max="100"
         value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        onChange={(e) => {
+          onSlide(Number(e.target.value));
+        }}
       />
       <span>
         Grid Size {value} x {value}

@@ -4,19 +4,26 @@ import FlexContainer from "./components/FlexContainer";
 import Grid from "./components/Grid";
 import Header from "./components/Header";
 import Slider from "./components/Slider";
-import GridItem from "./components/GridItem";
+import ClearButton from "./components/ClearButton";
+
+const DEFAULT_GRID_SIZE = 16;
 
 function App() {
-  const [gridIsClicked, setGridIsClicked] = useState(false);
   const [isEraserMode, setIsEraserMode] = useState(false);
-  const [colorValues, setColorValues] = useState(Array(16 ** 2).fill(0));
   const [showLines, setShowLines] = useState(true);
+  const [gridSize, setGridSize] = useState(DEFAULT_GRID_SIZE);
+  const [isClear, setIsClear] = useState(false);
 
   useEffect(() => {
-    document.addEventListener("mouseup", () => {
-      setGridIsClicked(false);
-    });
-  }, []);
+    if (isClear) {
+      const elements = document.querySelectorAll(".gridItem");
+      elements.forEach(
+        (gridItem) =>
+          ((gridItem as HTMLElement).style.backgroundColor = "rgba(0,0,0,0)")
+      );
+      setIsClear(false);
+    }
+  }, [isClear]);
 
   return (
     <div className="app">
@@ -28,30 +35,14 @@ function App() {
         >
           Eraser
         </Button>
-        <Button
-          className="clearBtn"
-          onClick={() => {
-            setColorValues((values) => values.map(() => 0));
-          }}
-        >
-          Clear
-        </Button>
+        <ClearButton onClear={setIsClear} />
       </FlexContainer>
-      <Grid>
-        {colorValues.map((val, i) => (
-          <GridItem
-            key={i}
-            onGridEnable={() => setGridIsClicked(true)}
-            onGridDisable={() => setGridIsClicked(false)}
-            gridIsClicked={gridIsClicked}
-            isEraserMode={isEraserMode}
-            colorValue={val}
-            onShade={setColorValues}
-            index={i}
-            showLines={showLines}
-          />
-        ))}
-      </Grid>
+      <Grid
+        size={gridSize}
+        isEraserMode={isEraserMode}
+        showLines={showLines}
+        isClear={isClear}
+      />
       <FlexContainer>
         <Button
           className="toggleLinesBtn"
@@ -59,7 +50,7 @@ function App() {
         >
           Toggle Grid Lines
         </Button>
-        <Slider />
+        <Slider value={gridSize} onSlide={(size) => setGridSize(size)} />
       </FlexContainer>
     </div>
   );

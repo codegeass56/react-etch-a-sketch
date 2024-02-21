@@ -1,30 +1,24 @@
+import { memo, useState } from "react";
+
 type Props = {
-  onGridEnable: () => void;
-  onGridDisable: () => void;
-  gridIsClicked: boolean;
   isEraserMode: boolean;
-  colorValue: number;
-  onShade: React.Dispatch<React.SetStateAction<number[]>>;
-  index: number;
   showLines: boolean;
+  gridIsClicked: boolean;
+  isClear: boolean;
 };
 
-function GridItem({
-  onGridEnable,
-  onGridDisable,
-  gridIsClicked,
+const GridItem = memo(function GridItem({
   isEraserMode,
-  colorValue,
-  onShade,
-  index,
   showLines,
+  gridIsClicked,
 }: Props) {
+  const [colorValue, setColorValue] = useState(0);
   const styles: React.CSSProperties = {
     backgroundColor: `rgba(0,0,0,${colorValue})`,
     border: showLines ? "1px solid rgb(204, 204, 204)" : "none",
   };
 
-  function handleShade() {
+  function handleColoring() {
     if (!gridIsClicked) return;
     if (isEraserMode) {
       eraseCell();
@@ -36,15 +30,13 @@ function GridItem({
   function colorCell() {
     let newVal = Number((colorValue + 0.1).toFixed(1));
     newVal = newVal > 0.9 ? 1 : newVal;
-
-    onShade((values) => values.map((val, i) => (i === index ? newVal : val)));
+    setColorValue(newVal);
   }
 
   function eraseCell() {
     let newVal = Number((colorValue - 0.1).toFixed(1));
     newVal = newVal < 0 ? 0 : newVal;
-
-    onShade((values) => values.map((val, i) => (i === index ? newVal : val)));
+    setColorValue(newVal);
   }
 
   return (
@@ -58,14 +50,10 @@ function GridItem({
         } else {
           colorCell();
         }
-        onGridEnable();
       }}
-      onMouseUp={onGridDisable}
-      onMouseEnter={() => {
-        handleShade();
-      }}
+      onMouseEnter={() => handleColoring()}
     ></div>
   );
-}
+});
 
 export default GridItem;
